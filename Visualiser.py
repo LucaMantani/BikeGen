@@ -16,8 +16,13 @@ class Visualiser:
         ball = Circle((0.1,0.1), radius=2)
         axes.add_patch(ball)
 
+        def init():
+            ball.set_visible(False)
+            return [ball]
+
         def animate(i):
             # shift the ball's position
+            if i == 1: ball.set_visible(True)
             ball.center = (i/10.,i/15.)
             return ball,
 
@@ -25,6 +30,7 @@ class Visualiser:
         ani = animation.FuncAnimation(figure, 
                                     animate, 
                                     np.arange(1, 50), 
+                                    init_func = init,
                                     interval=25,
                                     blit=True)
 
