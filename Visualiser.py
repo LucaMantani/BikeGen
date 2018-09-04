@@ -6,32 +6,29 @@ import matplotlib.animation as animation
 
 class Visualiser:
 
+    def __init__(self, pts, updateFunc):
+        self.pts = pts
+        self.updateFunc = updateFunc
+
     def run(self):
 
         figure = plt.figure()
         axes = figure.add_subplot('111', aspect='equal')
-        axes.set_xlim(-2, 7)
-        axes.set_ylim(-2, 7)
+        axes.set_xlim(0, 1)
+        axes.set_ylim(0, 1)
 
-        # add a patch to the axis
-        ball = Circle((0.1, 0.1), radius=2)
-        axes.add_patch(ball)
-
-        def init():
-            ball.set_visible(False)
-            return [ball]
+        line, = axes.plot([], [], 'b.', ms=16)
 
         def animate(i):
-            # shift the ball's position
-            if i == 1 : ball.set_visible(True)
-            ball.center = (i/10., i/15.)
-            return ball,
+            self.updateFunc()
+            xs = [ p.x() for p in self.pts ]
+            ys = [ p.y() for p in self.pts ]
+            line.set_data(xs, ys)
+            return line,
 
         # afterwards, switch to zoomable GUI mode
         ani = animation.FuncAnimation(figure,
                                       animate,
-                                      np.arange(1, 50),
-                                      init_func=init,
                                       interval=25,
                                       blit=True)
 
