@@ -1,14 +1,14 @@
 import numpy as np
 import numpy.random as rand
 from Bike import Bike
-from Point import Point
+from Vector import Vector
 
 class Evolver:
 
     def generateWheel(sigma):
         phi = rand.uniform(0, 2 * np.pi)
         r = rand.normal(0, sigma)
-        return Point(r * np.cos(phi), r * np.sin(phi))
+        return Vector(r * np.cos(phi), r * np.sin(phi))
 
     def generateBike(sigma):
         return Bike([ Evolver.generateWheel(sigma) for _ in range(4) ])
@@ -18,7 +18,7 @@ class Evolver:
 
     def fitness(bike):
         invFitness = sum([ 
-            ((v1 - v2).r() - 1) ** 2 for (v1, v2) in bike.springs()
+            ((v1 - v2).r - 1) ** 2 for (v1, v2) in bike.springs()
         ])
         return 1.0 / invFitness
 
