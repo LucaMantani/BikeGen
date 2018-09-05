@@ -1,50 +1,52 @@
-from Point import Point
+from Vector import Vector
 from Bike import Bike
 import numpy as np
 
+
+mass = 1
+springk = 0.001
+springx0 = 1
+radius = 0.03
+
+damping = 0.01
+
+def springs(bike):
+    forces = [ Vector(0, 0) for _ in bike.vertices ]
+
+    for i1, i2 in bike.pairs():
+        d = bike.vertices[i2] - bike.vertices[i1]
+        F = springk * (d.r - springx0) * d.unitVector()
+        forces[i1] += F
+        forces[i2] -= F
+
+    for i in range(len(forces)):
+        bike.velocities[i] += forces[i] / mass
+
+
+def gravity(bike):
+    pass
+
+def damping(bike):
+    pass
+
 def timestep(bike):
-    "Evaluate the physics for the bike in a small dt timestep"
+    springs(bike)
+    gravity(bike)
+    damping(bike)
 
-    #for now set some values manually
-    #spring constants=1, masses=1, damping=0.1
-    #maybe include this in the bike class?!
-    masses = np.ones(4)
-    spring_constants = np.ones(6)
-
-    #split the computation in 4 subfunctions
-    compute_spring_forces(bike,spring_constants,masses)
-    compute_wheel_force(bike)
     for i in range(len(bike.vertices)):
-        bike.vertices[i] +=Point(0,-0.003)
-    #for vert in bike.vertices:
-    #    vert = compute_gravity(vert)
-    compute_ground_collision(bike)
+        bike.vertices[i] += bike.velocities[i]
 
-    #do the dt timestep by updating the velocities and the vertices
+#    for wheel in bike.vertices:
 
-    #return updated bike
-    return bike
-    
-def compute_spring_forces(bike,spring_constants,masses):
-    "Solve the dgl for the springs for a dt timestep, return 4 forces?"
-    damping = 0.1
+        # Compute force from gravity and springs
+
+        # Update position based on forces
+
+        # Detect collisions with ground
+
+        # Update position again based on collisions
 
 
-def compute_wheel_force(bike):
-    "Compute the force on the wheel due to the constant torque"
-    #first point of bike is the wheel, add constant force
-    bike.vertices[0] += Point(0.002,0)
 
-#def compute_gravity(vert):
-#    "Include a simple form of gravity"
-#    vert += Point(0,-0.002)
-#    return vert
-    
-def compute_ground_collision(bike):
-    "Check if point of the bike hit the ground"
-    for i in range(len(bike.vertices)):
-        if bike.vertices[i].y() < 0.0:
-            bike.vertices[i] = Point(bike.vertices[i].x(),0)
-    #for vert in bike.vertices:
-    #    if float(vert.y()) < 0.0:
-    #        vert.y = 0.0
+
