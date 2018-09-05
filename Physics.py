@@ -20,8 +20,8 @@ def springs(bike):
 
         F = s.k * (d.r - springx0) * d.unitVector()
 
-        forces[s.i1] += F - damping * bike.velocities[s.i1]
-        forces[s.i2] -= F + damping * bike.velocities[s.i2]
+        forces[s.i1] += F - s.damping * bike.velocities[s.i1]
+        forces[s.i2] -= F + s.damping * bike.velocities[s.i2]
 
     for i in range(len(forces)):
         bike.velocities[i] += forces[i] / mass
