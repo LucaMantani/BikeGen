@@ -1,9 +1,20 @@
-
+import numpy as np
+import numpy.random as rand
+from Bike import Bike
+from Point import Point
 
 class Evolver:
 
-    def generateInitialPopulation():
-        pass
+    def generateWheel(sigma):
+        phi = rand.uniform(0, 2 * np.pi)
+        r = rand.normal(0, sigma)
+        return Point(r * np.cos(phi), r * np.sin(phi))
+
+    def generateBike(sigma):
+        return Bike([ Evolver.generateWheel(sigma) for _ in range(4) ])
+
+    def generateInitialPopulation(sigma, nIndividuals):
+        return [ Evolver.generateBike(sigma) for _ in range(nIndividuals) ]
 
     def fitness(bike):
         pass
