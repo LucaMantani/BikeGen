@@ -4,10 +4,10 @@ import numpy as np
 
 
 mass = 1
-springk = 0.001
+springk = 0.01
 springx0 = 1
 radius = 0.03
-g_N = 0.0001
+g_N = 0.001
 
 damping = 0.01
 
@@ -30,12 +30,21 @@ def gravity(bike):
     for i in range(len(bike.vertices)):
         bike.velocities[i] += gravity_force
 
+def ground_collision(bike):
+    for i in range(len(bike.vertices)):
+        if bike.vertices[i].y < -1.0:
+            bike.vertices[i] = Vector(bike.vertices[i].x, -1.0)
+            bike.velocities[i] = Vector(bike.velocities[i].x, 0.0)
+
+
 def timestep(bike):
     springs(bike)
     gravity(bike)
 
     for i in range(len(bike.vertices)):
         bike.vertices[i] += bike.velocities[i]
+
+    ground_collision(bike)
 
 #    for wheel in bike.vertices:
 
