@@ -3,14 +3,11 @@ from Bike import Bike
 import numpy as np
 
 
-mass = 1
-springk = 0.01
+# mass = 1
 springx0 = 0.7
 radius = 0.03
 g_N = 0.0005
 driving = 0.001
-
-damping = 0.01
 
 def springs(bike):
     forces = [ Vector(0, 0) for _ in bike.vertices ]
@@ -24,7 +21,7 @@ def springs(bike):
         forces[s.i2] -= F + s.damping * bike.velocities[s.i2]
 
     for i in range(len(forces)):
-        bike.velocities[i] += forces[i] / mass
+        bike.velocities[i] += forces[i] / bike.masses[i]
 
 
 def gravity(bike):
@@ -50,17 +47,7 @@ def timestep(bike):
     ground_collision(bike)
 
     if bike.vertices[0].y == -1.0:
-        bike.velocities[0] += driving / mass * Vector(1.0, 0.0)
-
-#    for wheel in bike.vertices:
-
-        # Compute force from gravity and springs
-
-        # Update position based on forces
-
-        # Detect collisions with ground
-
-        # Update position again based on collisions
+        bike.velocities[0] += driving / bike.masses[0] * Vector(1.0, 0.0)
 
 
 
