@@ -17,7 +17,10 @@ class Evolver:
         return [ Evolver.generateBike(sigma) for _ in range(nIndividuals) ]
 
     def fitness(bike):
-        pass
+        invFitness = sum([ 
+            ((v1 - v2).r() - 1) ** 2 for (v1, v2) in bike.springs()
+        ])
+        return 1.0 / invFitness
 
     # def sortBikes():
     #    pass
