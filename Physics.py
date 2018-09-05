@@ -11,9 +11,6 @@ def timestep(bike):
     masses = np.ones(4)
     spring_constants = np.ones(6)
 
-    #first point of bike is the wheel with constant force
-    driving_wheel = bike.vertices[0]
-
     #split the computation in 4 subfunctions
     compute_spring_forces(bike,spring_constants,masses)
     compute_wheel_force(bike)
@@ -35,6 +32,7 @@ def compute_spring_forces(bike,spring_constants,masses):
 
 def compute_wheel_force(bike):
     "Compute the force on the wheel due to the constant torque"
+    #first point of bike is the wheel, add constant force
     bike.vertices[0] += Point(0.002,0)
 
 #def compute_gravity(vert):
