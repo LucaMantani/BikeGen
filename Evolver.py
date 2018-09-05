@@ -22,8 +22,9 @@ class Evolver:
         ])
         return 1.0 / invFitness
 
-    # def sortBikes():
-    #    pass
+    def sortBikes(bikes):
+        bikes.sort(key = Evolver.fitness, reverse = True)
+        return bikes
 
     def selectParents(population):
         pass
