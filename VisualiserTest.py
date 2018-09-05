@@ -1,12 +1,13 @@
 from Point import Point
+from Bike import Bike
 from Visualiser import Visualiser
 
-pts = [ Point(0, 0), Point(0, 0.1), Point(0, 0.2) ]
+bike = Bike([ Point(0.4, 0.4), Point(0.6, 0.4), Point(0.55, 0.5), Point(0.45, 0.45) ])
 
 def updatePoints():
-    for i in range(len(pts)):
-        pts[i] += Point(0.01, 0.01)
+    for i in range(len(bike.vertices)):
+        bike.vertices[i] += Point(0, -0.003)
 
-v = Visualiser(pts, updatePoints)
+v = Visualiser(bike, updatePoints)
 
 v.run()
