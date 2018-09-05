@@ -1,18 +1,19 @@
 from Bike import Bike
 from Vector import Vector
 from Visualiser import Visualiser
-import Evolver
+import Genetics
 
 theBike = Bike([ Vector(-0.5, -0.5), Vector(0.5, -0.5), Vector(0.5, 0.5), Vector(-0.5, 0.5) ])
-print(1.0 / Evolver.fitness(theBike))
+print(1.0 / Genetics.fitness(theBike))
 
-bikes = Evolver.generateInitialPopulation(0.2, 100)
-Evolver.sortBikes(bikes)
-theBike = Evolver.generateBike(0.2)
+bikes = Genetics.generateInitialPopulation(0.2, 100)
+Genetics.sortBikes(bikes)
+theBike = Genetics.generateBike(0.2)
 
 def updateVertices(frameNumber):
-    theBike.vertices = bikes[frameNumber].vertices
-    print(Evolver.fitness(theBike))
+    if frameNumber % 20 == 0:
+        theBike.vertices = bikes[int(frameNumber / 20)].vertices
+    
 
 v = Visualiser(theBike, updateVertices)
 v.run()
