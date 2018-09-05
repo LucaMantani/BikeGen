@@ -21,8 +21,11 @@ class Visualiser:
 
         # Initialize graphics objects
         vertices = []
-        for vertex in self.bike.vertices:
-            newVertex = Circle((vertex.x, vertex.y), 0.01)
+        for i in range(len(self.bike.vertices)):
+            if i ==0 or i == 1:
+                newVertex = Circle((self.bike.vertices[i].x, self.bike.vertices[i].y), self.bike.radii[i])
+            else:
+                newVertex = Circle((self.bike.vertices[i].x, self.bike.vertices[i].y), 0.01)
             newVertex.set_visible(False)
             vertices.append(newVertex)
             axes.add_patch(newVertex)

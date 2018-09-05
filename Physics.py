@@ -3,7 +3,6 @@ from Bike import Bike
 import numpy as np
 
 
-# mass = 1
 springx0 = 0.7
 radius = 0.03
 g_N = 0.0005
@@ -32,9 +31,14 @@ def gravity(bike):
 
 def ground_collision(bike):
     for i in range(len(bike.vertices)):
-        if bike.vertices[i].y < -1.0:
-            bike.vertices[i] = Vector(bike.vertices[i].x, -1.0)
-            bike.velocities[i] = Vector(bike.velocities[i].x, 0.0)
+        if i ==0 or i ==1:
+            if (bike.vertices[i].y - bike.radii[i]) < -1.0:
+                bike.vertices[i] = Vector(bike.vertices[i].x, -1.0 + bike.radii[i])
+                bike.velocities[i] = Vector(bike.velocities[i].x, 0.0)
+        else:
+            if bike.vertices[i].y < -1.0:
+                bike.vertices[i] = Vector(bike.vertices[i].x, -1.0)
+                bike.velocities[i] = Vector(bike.velocities[i].x, 0.0)
 
 
 def timestep(bike):
@@ -46,7 +50,7 @@ def timestep(bike):
 
     ground_collision(bike)
 
-    if bike.vertices[0].y == -1.0:
+    if bike.vertices[0].y == -1.0 + bike.radii[0]:
         bike.velocities[0] += driving / bike.masses[0] * Vector(1.0, 0.0)
 
 
