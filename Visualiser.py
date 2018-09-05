@@ -22,14 +22,14 @@ class Visualiser:
         # Initialize graphics objects
         vertices = []
         for vertex in self.bike.vertices:
-            newVertex = Circle((vertex.x(), vertex.y()), 0.01)
+            newVertex = Circle((vertex.x, vertex.y), 0.01)
             newVertex.set_visible(False)
             vertices.append(newVertex)
             axes.add_patch(newVertex)
 
         lines = []
         for line in self.bike.springs(): 
-            newLine = Polygon([ [ line[0].x(), line[0].y() ], [ line[1].x(), line[1].y()] ], fill=False)
+            newLine = Polygon([ [ line[0].x, line[0].y ], [ line[1].x, line[1].y] ], fill=False)
             newLine.set_visible(False)
             lines.append(newLine)
             axes.add_patch(newLine)
@@ -49,11 +49,11 @@ class Visualiser:
 
             # Update position of graphical objects
             for i in range(len(vertices)):
-                vertices[i].center = (self.bike.vertices[i].x(), self.bike.vertices[i].y())
+                vertices[i].center = (self.bike.vertices[i].x, self.bike.vertices[i].y)
             
             l = self.bike.springs()
             for i in range(len(lines)):
-                lines[i].set_xy([ [ l[i][0].x(), l[i][0].y() ], [ l[i][1].x(), l[i][1].y() ]])
+                lines[i].set_xy([ [ l[i][0].x, l[i][0].y ], [ l[i][1].x, l[i][1].y ]])
 
             return lines + vertices
 
