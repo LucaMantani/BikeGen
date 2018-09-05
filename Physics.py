@@ -5,9 +5,10 @@ import numpy as np
 
 mass = 1
 springk = 0.01
-springx0 = 1
+springx0 = 0.7
 radius = 0.03
-g_N = 0.001
+g_N = 0.0001
+driving = 0.001
 
 damping = 0.01
 
@@ -45,6 +46,9 @@ def timestep(bike):
         bike.vertices[i] += bike.velocities[i]
 
     ground_collision(bike)
+
+    if bike.vertices[0].y == -1.0:
+        bike.velocities[0] += driving / mass * Vector(1.0, 0.0)
 
 #    for wheel in bike.vertices:
 
