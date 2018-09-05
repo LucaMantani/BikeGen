@@ -1,8 +1,10 @@
+from Vector import Vector
 
 class Bike:
 
     def __init__(self, vertices):
         self.vertices = vertices
+        self.velocities = [Vector(0,0) for y in range(4)]
     
     def springs(self):
         return [ 
