@@ -7,6 +7,7 @@ mass = 1
 springk = 0.001
 springx0 = 1
 radius = 0.03
+g_N = 0.0001
 
 damping = 0.01
 
@@ -16,23 +17,22 @@ def springs(bike):
     for i1, i2 in bike.pairs():
         d = bike.vertices[i2] - bike.vertices[i1]
         F = springk * (d.r - springx0) * d.unitVector()
-        forces[i1] += F
-        forces[i2] -= F
+        forces[i1] += F - damping * bike.velocities[i1]
+        forces[i2] -= F + damping * bike.velocities[i2]
 
     for i in range(len(forces)):
         bike.velocities[i] += forces[i] / mass
 
 
 def gravity(bike):
-    pass
+    gravity_force = Vector(0.0, -g_N)
 
-def damping(bike):
-    pass
+    for i in range(len(bike.vertices)):
+        bike.velocities[i] += gravity_force
 
 def timestep(bike):
     springs(bike)
     gravity(bike)
-    damping(bike)
 
     for i in range(len(bike.vertices)):
         bike.vertices[i] += bike.velocities[i]
