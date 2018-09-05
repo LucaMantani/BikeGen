@@ -7,7 +7,7 @@ mass = 1
 springk = 0.01
 springx0 = 0.7
 radius = 0.03
-g_N = 0.0001
+g_N = 0.0005
 driving = 0.001
 
 damping = 0.01
@@ -15,11 +15,13 @@ damping = 0.01
 def springs(bike):
     forces = [ Vector(0, 0) for _ in bike.vertices ]
 
-    for i1, i2 in bike.pairs():
-        d = bike.vertices[i2] - bike.vertices[i1]
-        F = springk * (d.r - springx0) * d.unitVector()
-        forces[i1] += F - damping * bike.velocities[i1]
-        forces[i2] -= F + damping * bike.velocities[i2]
+    for s in bike.springs:
+        d = bike.vertices[s.i2] - bike.vertices[s.i1]
+
+        F = s.k * (d.r - springx0) * d.unitVector()
+
+        forces[s.i1] += F - damping * bike.velocities[s.i1]
+        forces[s.i2] -= F + damping * bike.velocities[s.i2]
 
     for i in range(len(forces)):
         bike.velocities[i] += forces[i] / mass
