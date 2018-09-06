@@ -22,7 +22,7 @@ class Visualiser:
         # Initialize graphics objects
         vertices = []
         for i in range(len(self.bike.vertices)):
-            newVertex = Circle((self.bike.vertices[i].x, self.bike.vertices[i].y), self.bike.radii[i])
+            newVertex = Circle((self.bike.vertices[i].x, self.bike.vertices[i].y), self.bike.wheels[i].radius)
             newVertex.set_visible(False)
             vertices.append(newVertex)
             axes.add_patch(newVertex)

@@ -1,5 +1,13 @@
 from Vector import Vector
 
+
+class Wheel:
+    def __init__(self, pos, mass, radius):
+        self.pos = pos
+        self.vel = Vector(0, 0)
+        self.mass = mass
+        self.radius = radius
+
 class Spring:
     def __init__(self, i1, i2, k, damping):
         self.i1 = i1
@@ -12,12 +20,13 @@ class Bike:
 
     idxs = [ (0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3) ]
 
-    def __init__(self, vertices, springs, masses, radii):
-        self.vertices = vertices
-        self.velocities = [ Vector(0, 0) for _ in vertices ]
+    def __init__(self, wheels, springs):
+        self.wheels = wheels
         self.springs = springs
-        self.masses = masses
-        self.radii = radii
+
+    @property
+    def vertices(self): 
+        return [ w.pos for w in self.wheels ]
 
     def springVertices(self):
         return [ (self.vertices[s.i1], self.vertices[s.i2]) for s in self.springs ]
