@@ -33,8 +33,13 @@ def gravity(bike):
 def ground_collision(bike):
     for wheel in bike.wheels:
         if (wheel.pos.y - wheel.radius) < -1.0:
+            if wheel.isFragile:
+                return False
             wheel.pos = Vector(wheel.pos.x, -1.0 + wheel.radius)
             wheel.vel = Vector(wheel.vel.x, 0.0)
+
+    return True
+        
 
 
 def timestep(bike):
