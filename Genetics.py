@@ -3,6 +3,9 @@ import numpy.random as rand
 from Bike import Bike
 from Vector import Vector
 
+wheelDistanceExtension = 0.1
+mutationRate = 0.1
+mutationAmount = 0.25
 
 def generateWheel(sigma):
     phi = rand.uniform(0, 2 * np.pi)
@@ -23,10 +26,16 @@ def fitness(bike):
 
 
 def crossoverWheel(w1, w2):
-    return 0.5 * (w1 + w2) 
+    t = np.random.uniform(-wheelDistanceExtension, 1.0 + wheelDistanceExtension)
+    return (1 - t) * w1 + t * w2
 
 def mutate(child):
-    pass
+    for i in range(len(child.vertices)):
+        if np.random.rand() < mutationRate:
+            phi = np.random.rand() * 2 * np.pi
+            r = np.random.normal(0, mutationAmount)
+            child.vertices[i] += Vector(r * np.cos(phi), r * np.sin(phi))
+    
 
 def generateOffspring(parents):
     newWheels = []
