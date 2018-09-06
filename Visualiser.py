@@ -28,7 +28,7 @@ class Visualiser:
             axes.add_patch(newVertex)
 
         lines = []
-        for line in self.bike.springs(): 
+        for line in self.bike.springVertices(): 
             newLine = Polygon([ [ line[0].x, line[0].y ], [ line[1].x, line[1].y] ], fill=False)
             newLine.set_visible(False)
             lines.append(newLine)
@@ -51,7 +51,7 @@ class Visualiser:
             for i in range(len(vertices)):
                 vertices[i].center = (self.bike.vertices[i].x, self.bike.vertices[i].y)
             
-            l = self.bike.springs()
+            l = self.bike.springVertices()
             for i in range(len(lines)):
                 lines[i].set_xy([ [ l[i][0].x, l[i][0].y ], [ l[i][1].x, l[i][1].y ]])
 
