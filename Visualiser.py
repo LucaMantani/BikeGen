@@ -6,8 +6,9 @@ import matplotlib.animation as animation
 
 class Visualiser:
 
-    def __init__(self, bike, updateFunc):
+    def __init__(self, bike, ground, updateFunc):
         self.bike = bike
+        self.ground = ground
         self.updateFunc = updateFunc
 
 
@@ -21,8 +22,8 @@ class Visualiser:
 
         # Initialize graphics objects
         vertices = []
-        for vertex in self.bike.vertices:
-            newVertex = Circle((vertex.x, vertex.y), 0.01)
+        for wheel in self.bike.wheels:
+            newVertex = Circle((wheel.pos.x, wheel.pos.y), wheel.radius)
             newVertex.set_visible(False)
             vertices.append(newVertex)
             axes.add_patch(newVertex)
@@ -34,6 +35,8 @@ class Visualiser:
             lines.append(newLine)
             axes.add_patch(newLine)
 
+        ground = Polygon([[-1, -1]] + [ [ p.x, p.y ] for p in self.ground.vertices ] + [[1, -1]])
+        axes.add_patch(ground)
 
         def animate(frameNumber):
             # Without this, a copy of the figure will always be shown at its original position
@@ -59,8 +62,8 @@ class Visualiser:
 
 
         ani = animation.FuncAnimation(figure,
-                                      animate,
-                                      interval=25,
-                                      blit=True)
+                                        animate,
+                                        interval=25,
+                                        blit=True)
 
         plt.show()
