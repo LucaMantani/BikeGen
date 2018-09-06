@@ -31,13 +31,6 @@ def generateBike(sigma):
 def generateInitialPopulation(sigma, nIndividuals):
     return [ generateBike(sigma) for _ in range(nIndividuals) ]
 
-def fitness(bike):
-    invFitness = sum([ 
-        ((bike.vertices[s.i1] - bike.vertices[s.i2]).r - 1) ** 2 
-        for s in bike.springs
-    ])
-    return 1.0 / invFitness
-
 
 def crossoverWheel(w1, w2):
     t = np.random.uniform(-wheelDistanceExtension, 1.0 + wheelDistanceExtension)
@@ -64,8 +57,8 @@ def generateOffspring(parents):
     return child
 
 
-def evolve(population):
-    scores = [ fitness(bike) for bike in population ]
+def evolve(population, fitnessFunc):
+    scores = [ fitnessFunc(bike) for bike in population ]
     totalScore = sum(scores)
     probs = [ score / totalScore for score in scores ]
 
