@@ -1,8 +1,8 @@
 from Bike import Bike
+from Ground import Ground
 from Vector import Vector
 from Visualiser import Visualiser
 import Genetics
-import Ground
 
 theBike = Genetics.generateBike(0.5)
 bikes = Genetics.generateInitialPopulation(0.5, 100)
