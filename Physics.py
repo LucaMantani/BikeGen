@@ -31,14 +31,9 @@ def gravity(bike):
 
 def ground_collision(bike):
     for i in range(len(bike.vertices)):
-        if i ==0 or i ==1:
-            if (bike.vertices[i].y - bike.radii[i]) < -1.0:
-                bike.vertices[i] = Vector(bike.vertices[i].x, -1.0 + bike.radii[i])
-                bike.velocities[i] = Vector(bike.velocities[i].x, 0.0)
-        else:
-            if bike.vertices[i].y < -1.0:
-                bike.vertices[i] = Vector(bike.vertices[i].x, -1.0)
-                bike.velocities[i] = Vector(bike.velocities[i].x, 0.0)
+        if (bike.vertices[i].y - bike.radii[i]) < -1.0:
+            bike.vertices[i] = Vector(bike.vertices[i].x, -1.0 + bike.radii[i])
+            bike.velocities[i] = Vector(bike.velocities[i].x, 0.0)
 
 
 def timestep(bike):
