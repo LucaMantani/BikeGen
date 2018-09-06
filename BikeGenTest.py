@@ -3,16 +3,16 @@ from Vector import Vector
 from Visualiser import Visualiser
 import Genetics
 
-theBike = Bike([ Vector(-0.5, -0.5), Vector(0.5, -0.5), Vector(0.5, 0.5), Vector(-0.5, 0.5) ])
-print(1.0 / Genetics.fitness(theBike))
 
-bikes = Genetics.generateInitialPopulation(0.2, 100)
-Genetics.sortBikes(bikes)
-theBike = Genetics.generateBike(0.2)
+theBike = Genetics.generateBike(0.5)
+bikes = Genetics.generateInitialPopulation(0.5, 100)
+
 
 def updateVertices(frameNumber):
+    global bikes
     if frameNumber % 20 == 0:
-        theBike.vertices = bikes[int(frameNumber / 20)].vertices
+        bikes = Genetics.evolve(bikes)
+        theBike.vertices = bikes[0].vertices
     
 
 v = Visualiser(theBike, updateVertices)

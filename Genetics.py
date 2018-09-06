@@ -21,45 +21,34 @@ def fitness(bike):
     ])
     return 1.0 / invFitness
 
-def sortBikes(bikes):
-    bikes.sort(key = fitness, reverse = True)
-    return bikes
 
- def evolve(population):
-        length = len(population) #number of bikes, perheps this can be a global class variable
-        names = [t[0] for t in population] #the list of bikes, also a potential global
-        tot = sum(t[1] for t in population) #total fitness score
-        prob = []
-        pred = []
-        for i in range(length):
-            prob.append(population[i][1]/tot)
-            pred.append((bikes[i],population[i][1]/tot))
+def crossoverWheel(w1, w2):
+    return 0.5 * (w1 + w2) 
 
-        dic = dict(pred)
-        child = []
-        for i in range(length):
-            select = np.random.choice(names,2,p=prob)
-            mute = np.random.rand()
-            #if mute <=0.01:  #how likely the child is going to mutate
-             #   child.append
-                
-            child.append((dic[select[0]]/(dic[select[0]]+dic[select[1]]))*select[0] + (dic[select[1]]/(dic[select[0]]+dic[select[1]]))*select[1])
-  
-        return child
-            
+def mutate(child):
+    pass
+
+def generateOffspring(parents):
+    newWheels = []
+    for i in range(len(parents[0].vertices)):
+        newWheels.append(crossoverWheel(parents[0].vertices[i], parents[1].vertices[i]))
+    
+    child = Bike(newWheels)
+    mutate(child)
+    return child
 
 
-    def mutate(bike):
-        pass
+def evolve(population):
+    scores = [ fitness(bike) for bike in population ]
+    totalScore = sum(scores)
+    probs = [ score / totalScore for score in scores ]
 
-        
-        
+    children = [ generateOffspring(np.random.choice(population, 2, p=probs)) 
+                 for _ in population ]
+
+    return children
 
 
-    def nextGeneration():
-        p1, p2 = selectParents()
-        child = breed(p1, p2)
-        mutate(child)
-        return child
+
 
 
