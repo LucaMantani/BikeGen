@@ -6,7 +6,7 @@ import Physics
 
 theBike = Bike([ 
                     Wheel(Vector(-0.4, -0.4), 1, 0.05),
-                    Wheel(Vector(0.8, -0.9), 1, 0.05),
+                    Wheel(Vector(-0.3, -0.5), 1, 0.05),
                     Wheel(Vector(0.55, 0.5), 10, 0.01),
                     Wheel(Vector(-0.45, 0.45), 10, 0.01)
                ],
@@ -19,10 +19,10 @@ theBike = Bike([
                     Spring(2, 3, 0.001, 0.001)
                ])
 
-theGround = Ground([ Vector(-1, -1), Vector(-0.25, -0.5), Vector(0.25, -0.75), Vector(1, -0.8) ])
+ground = Ground([ Vector(-1, -1), Vector(-0.25, -0.5), Vector(0.25, -0.75), Vector(1, -0.8) ])
 
 def updateBike(frameNumber):
-    Physics.timestep(theBike)
+    Physics.timestep(theBike, ground)
 
-v = Visualiser(theBike, theGround, updateBike)
+v = Visualiser(theBike, ground, updateBike)
 v.run()

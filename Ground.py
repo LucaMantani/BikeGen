@@ -31,7 +31,7 @@ class Ground:
                 m = -direction.y/direction.x
                 perp_vec = Vector(1.0, m*1.0).unitVector()
 
-                return abs(a*vertex.x + b*vertex.y + c)/np.sqrt(a**2 + b**2) * perp_vec
+                return (abs(a*vertex.x + b*vertex.y + c)/np.sqrt(a**2 + b**2)) * perp_vec
 
 
 # a = Ground([Vector(0.0,0.0),Vector(0.3,0.0), Vector(0.5, 0.5), Vector(1.0, 0.0)])
