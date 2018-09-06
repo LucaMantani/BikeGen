@@ -17,7 +17,7 @@ def fitness(bike):
 
 def updateVertices(frameNumber):
     global bikes
-    if frameNumber % 20 == 0:
+    if frameNumber % 3 == 0:
         bikes = Genetics.evolve(bikes, fitness)
         theBike.wheels = bikes[0].wheels
     
