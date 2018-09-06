@@ -5,10 +5,10 @@ from Vector import Vector
 
 wheelDistanceExtension = 0.2
 mutationRate = 0.1
-wheelPosMutationAmount = 0.2
-springkMutationAmount = 0.2
-springDampingMutationAmount = 0.2
-springx0MutationAmount = 0.25
+
+wheelPosMutationAmount = 0.25
+springkMutationAmount = 0.025
+springDampingMutationAmount = 0.025
 
 
 def randomVector(sigma):
@@ -24,12 +24,13 @@ def generateBike(sigma):
             Wheel(randomVector(sigma), 1, 0.01, 0, True),
             Wheel(randomVector(sigma), 1, 0.01, 0, True)
         ], [
-            Spring(0, 1, 0.2, 0.1),
-            Spring(0, 2, 0.2, 0.1),
-            Spring(0, 3, 0.2, 0.1),
-            Spring(1, 2, 0.2, 0.1),
-            Spring(1, 3, 0.2, 0.1),
-            Spring(2, 3, 0.2, 0.1)
+
+            Spring(0, 1, 0.1, 0.01),
+            Spring(0, 2, 0.1, 0.01),
+            Spring(0, 3, 0.1, 0.01),
+            Spring(1, 2, 0.1, 0.01),
+            Spring(1, 3, 0.1, 0.01),
+            Spring(2, 3, 0.1, 0.01)
         ])
 
 def generateInitialPopulation(sigma, nIndividuals):
