@@ -27,34 +27,22 @@ def gravity(bike):
         wheel.vel += gravity_force
 
 
-def ground_collision(bike, ground):
+def groundCollision(bike, ground):
     for wheel in bike.wheels:        
         distanceVector = ground.distance(wheel.pos)
         if wheel.pos.y < ground.getHeight(wheel.pos.x) or distanceVector.r < wheel.radius:
-
+        
             dPerp = distanceVector.unitVector()
             dPar  = Vector(dPerp.y, -dPerp.x)
 
             vPar = wheel.vel.scalarProduct(dPar)
-
-
             wheel.pos += (wheel.radius - distanceVector.r) * dPerp
 
             if wheel.pos.y < ground.getHeight(wheel.pos.x):
                 wheel.pos -= 2*wheel.radius*dPerp
-            wheel.vel = vPar * dPar
-            if wheel.isFragile==True:
-                return False
-    return True
-            
-def driving_wheel(bike, ground):
-    for wheel in bike.wheels:
-        distanceVector = ground.distance(wheel.pos)
-        if distanceVector.r == wheel.radius:
-            dPerp = distanceVector.unitVector()
-            dPar  = Vector(dPerp.y, -dPerp.x)
 
-            wheel.vel += wheel.speed / wheel.mass * dPar
+            wheel.vel = (vPar + wheel.speed / wheel.mass) * dPar
+        
             
             
 def timestep(bike, ground):
@@ -64,11 +52,6 @@ def timestep(bike, ground):
     for wheel in bike.wheels:
         wheel.pos += wheel.vel
 
-    if not ground_collision(bike,ground):
-        return False
-
-    driving_wheel(bike, ground)
-
-    return True
+    groundCollision(bike,ground)
 
 
