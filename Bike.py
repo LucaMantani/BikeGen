@@ -16,11 +16,12 @@ class Wheel:
 
 
 class Spring:
-    def __init__(self, i1, i2, k, damping):
+    def __init__(self, i1, i2, k, damping, x0):
         self.i1 = i1
         self.i2 = i2
         self.k = k
         self.damping = damping
+        self.x0 = x0
 
 
 class Bike:
