@@ -18,8 +18,6 @@ class Spring:
 
 class Bike:
 
-    idxs = [ (0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3) ]
-
     def __init__(self, wheels, springs):
         self.wheels = wheels
         self.springs = springs
