@@ -3,7 +3,7 @@ import numpy.random
 from Bike import Wheel, Spring, Bike
 from Vector import Vector
 
-wheelDistanceExtension = 0.1
+wheelDistanceExtension = 0.2
 mutationRate = 0.1
 mutationAmount = 0.25
 
