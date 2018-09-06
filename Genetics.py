@@ -6,8 +6,9 @@ from Vector import Vector
 wheelDistanceExtension = 0.2
 mutationRate = 0.1
 wheelPosMutationAmount = 0.25
-springkMutationAmount = 0.25
-springDampingMutationAmount = 0.25
+springkMutationAmount = 0.025
+springDampingMutationAmount = 0.025
+
 
 def randomVector(sigma):
     phi = np.random.uniform(0, 2 * np.pi)
