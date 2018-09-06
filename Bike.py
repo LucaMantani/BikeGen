@@ -2,11 +2,12 @@ from Vector import Vector
 
 
 class Wheel:
-    def __init__(self, pos, mass, radius):
+    def __init__(self, pos, mass, radius, isFragile=False):
         self.pos = pos
         self.vel = Vector(0, 0)
         self.mass = mass
         self.radius = radius
+        self.isFragile = isFragile
 
 class Spring:
     def __init__(self, i1, i2, k, damping):
