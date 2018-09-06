@@ -12,7 +12,7 @@ def updateVertices(frameNumber):
     global bikes
     if frameNumber % 20 == 0:
         bikes = Genetics.evolve(bikes)
-        theBike.vertices = bikes[0].vertices
+        theBike.wheels = bikes[0].wheels
     
 
 v = Visualiser(theBike, updateVertices)
