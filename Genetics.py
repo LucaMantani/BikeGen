@@ -1,20 +1,31 @@
 import numpy as np
 import numpy.random as rand
-#from Bike import Bike
-#from Vector import Vector
+from Bike import Bike
+from Vector import Vector
 
-class Evolver:
 
-    def generateInitialPopulation():
-        pass
+def generateWheel(sigma):
+    phi = rand.uniform(0, 2 * np.pi)
+    r = rand.normal(0, sigma)
+    return Vector(r * np.cos(phi), r * np.sin(phi))
 
-    def fitness(bike):
-        pass
+def generateBike(sigma):
+    return Bike([ generateWheel(sigma) for _ in range(4) ])
 
-    # def sortBikes():
-    #    pass
+def generateInitialPopulation(sigma, nIndividuals):
+    return [ generateBike(sigma) for _ in range(nIndividuals) ]
 
-    def evolve(population):
+def fitness(bike):
+    invFitness = sum([ 
+        ((v1 - v2).r - 1) ** 2 for (v1, v2) in bike.springs()
+    ])
+    return 1.0 / invFitness
+
+def sortBikes(bikes):
+    bikes.sort(key = fitness, reverse = True)
+    return bikes
+
+ def evolve(population):
         length = len(population) #number of bikes, perheps this can be a global class variable
         names = [t[0] for t in population] #the list of bikes, also a potential global
         tot = sum(t[1] for t in population) #total fitness score
@@ -50,4 +61,5 @@ class Evolver:
         child = breed(p1, p2)
         mutate(child)
         return child
+
 
