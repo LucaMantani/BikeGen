@@ -22,8 +22,8 @@ def simulate(bike):
     return maxlifetime
             
 
-#for i in range(10):
-#     bikes = Genetics.evolve(bikes,simulate)
+for i in range(100):
+     bikes = Genetics.evolve(bikes,simulate)
         
 
 
