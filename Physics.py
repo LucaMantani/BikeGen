@@ -38,7 +38,7 @@ def ground_collision(bike):
             wheel.pos = Vector(wheel.pos.x, -1.0 + wheel.radius)
             wheel.vel = Vector(wheel.vel.x, 0.0)
 
-        return True
+    return True
         
 
 
@@ -49,11 +49,12 @@ def timestep(bike):
     for wheel in bike.wheels:
         wheel.pos += wheel.vel
 
-    ground_collision(bike)
+    if not ground_collision(bike):
+        return False
 
     if bike.vertices[0].y == -1.0 + bike.wheels[0].radius:
         bike.wheels[0].vel += driving / bike.wheels[0].mass * Vector(1.0, 0.0)
 
-
+    return True
 
 
