@@ -17,7 +17,7 @@ class Visualiser:
         # Initialize figure
         figure = plt.figure()
         axes = figure.add_subplot('111', aspect='equal')
-        axes.set_xlim(-1, 1)
+        axes.set_xlim(-3, 3)
         axes.set_ylim(-1, 1)
 
         # Initialize graphics objects
@@ -38,7 +38,7 @@ class Visualiser:
             lines.append(newLine)
             axes.add_patch(newLine)
 
-        ground = Polygon([[-1, -1]] + [ [ p.x, p.y ] for p in self.ground.vertices ] + [[1, -1]])
+        ground = Polygon([[-5, -1]] + [ [ p.x, p.y ] for p in self.ground.vertices ] + [[5, -1]])
         axes.add_patch(ground)
 
         def animate(frameNumber):

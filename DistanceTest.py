@@ -8,8 +8,8 @@ import numpy as np
 
 bikes = Genetics.generateInitialPopulation(0.25, 30)
 
-#theGround = Ground([ Vector(-1, -0.9), Vector(1, -0.9) ])
-theGround = Ground([ Vector(-1, -0.5), Vector(-0.75, -0.75), Vector(-0.25, -0.5), Vector(0.25, -0.75), Vector(0.5, -0.8), Vector(1, -0.5) ])
+theGround = Ground([ Vector(-3, -0.9), Vector(3, -0.9) ])
+#theGround = Ground([ Vector(-1, -0.5), Vector(-0.75, -0.75), Vector(-0.25, -0.5), Vector(0.25, -0.75), Vector(0.5, -0.8), Vector(1, -0.5) ])
 
 def distanceSim(bike):
     bike = copy.deepcopy(bike)
@@ -19,7 +19,7 @@ def distanceSim(bike):
     return np.mean([ w.pos.x for w in bike.wheels ]) + 1
 
 
-for _ in range(30):
+for _ in range(100):
     print(_)
     bikes = Genetics.evolve(bikes, distanceSim)
 
