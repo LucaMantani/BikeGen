@@ -17,7 +17,7 @@ class Visualiser:
         # Initialize figure
         figure = plt.figure()
         axes = figure.add_subplot('111', aspect='equal')
-        axes.set_xlim(-1, 1)
+        axes.set_xlim(-1, 5)
         axes.set_ylim(-1, 1)
 
         # Initialize graphics objects
