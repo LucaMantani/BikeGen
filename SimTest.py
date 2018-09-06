@@ -7,8 +7,8 @@ import Physics
 
 
 
-theBike = Genetics.generateBike(0.5)
-bikes = Genetics.generateInitialPopulation(0.5, 100)
+theBike = Genetics.generateBike(0.25)
+bikes = Genetics.generateInitialPopulation(0.25, 100)
 maxlifetime = 100
 
 theGround = Ground([ Vector(-1, -1), Vector(-1, -1), Vector(-1, -1), Vector(-1, -1) ])
