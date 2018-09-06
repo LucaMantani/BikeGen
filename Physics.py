@@ -3,7 +3,6 @@ from Bike import Bike
 import numpy as np
 from Ground import Ground
 
-springx0 = 0.1
 g_N = 0.0005
 
 def springs(bike):
@@ -13,7 +12,7 @@ def springs(bike):
         w1, w2 = bike.wheels[s.i1], bike.wheels[s.i2]
         d = w2.pos - w1.pos
 
-        F = s.k * (d.r - springx0) * d.unitVector()
+        F = s.k * (d.r - s.x0) * d.unitVector()
         forces[s.i1] += F - s.damping * w1.vel
         forces[s.i2] -= F + s.damping * w2.vel
 
