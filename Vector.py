@@ -30,6 +30,9 @@ class Vector():
     def __sub__(self, other):
         return Vector(self._x - other._x, self._y - other._y)
 
+    def __neg__(self):
+        return Vector(-self._x, -self._y)
+
     def __mul__(self, scale):
         return Vector(self._x * scale, self._y * scale)
 
