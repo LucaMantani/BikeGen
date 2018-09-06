@@ -18,9 +18,12 @@ class Evolver:
         names = np.array([t[0] for t in population])
         tot = sum(t[1] for t in population)
         prob = []
+        pred = []
         for i in range(len(population)):
             prob.append(population[i][1]/tot)
+            pred.append((bikes[i],population[i][1]/tot))
 
+        dic = dict(pred)
         select = np.random.choice(names,2,p=prob)
         #par1 = np.array(select[0].vertices)
         #par2 = np.array(select[1].vertices)
