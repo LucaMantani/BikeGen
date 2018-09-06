@@ -32,7 +32,7 @@ def gravity(bike):
 def ground_collision(bike, ground):
     for wheel in bike.wheels:
         distanceVector = ground.distance(wheel.pos)
-        if distanceVector.r < wheel.radius:
+        if wheel.pos.y < ground.getHeight(wheel.pos.x) or distanceVector.r < wheel.radius:
             dPerp = distanceVector.unitVector()
             dPar  = Vector(dPerp.y, -dPerp.x)
 
