@@ -1,7 +1,7 @@
 from Vector import Vector
 from Bike import Bike
 import numpy as np
-
+from Ground import Ground
 
 springx0 = 0.7
 g_N = 0.0005
@@ -29,11 +29,13 @@ def gravity(bike):
         wheel.vel += gravity_force
 
 
-def ground_collision(bike):
+def ground_collision(bike,ground):
     for wheel in bike.wheels:
-        if (wheel.pos.y - wheel.radius) < -1.0:
-            wheel.pos = Vector(wheel.pos.x, -1.0 + wheel.radius)
-            wheel.vel = Vector(wheel.vel.x, 0.0)
+        distance_vec = ground.distance(wheel)
+        if (distance_vec.r - wheel.radius) < 0.0:
+            wheel.pos += distance_vec.unitVector()*(distance_vec.r - wheel.radius)
+            velocity_direction = Vector(1.0, -distance_vec.y/distance_vec.x).unitVector()
+            wheel.vel = wheel.vel.scalarProduct(velocity_direction)*velocity_direction
 
 
 def timestep(bike):
@@ -43,7 +45,7 @@ def timestep(bike):
     for wheel in bike.wheels:
         wheel.pos += wheel.vel
 
-    ground_collision(bike)
+    ground_collision(bike,ground)
 
     if bike.vertices[0].y == -1.0 + bike.wheels[0].radius:
         bike.wheels[0].vel += driving / bike.wheels[0].mass * Vector(1.0, 0.0)
