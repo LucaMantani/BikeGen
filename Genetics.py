@@ -7,15 +7,19 @@ wheelDistanceExtension = 0.2
 mutationRate = 0.1
 mutationAmount = 0.25
 
-def generateWheel(sigma):
+def randomVector(sigma):
     phi = np.random.uniform(0, 2 * np.pi)
     r = np.random.normal(0, sigma)
-    return Wheel(Vector(r * np.cos(phi), r * np.sin(phi)), 1, 0.1) 
+    return Vector(r * np.cos(phi), r * np.sin(phi))
 
 def generateBike(sigma):
     return Bike(
-        [ generateWheel(sigma) for _ in range(4) ],
-        [
+        [ 
+            Wheel(randomVector(sigma), 1, 0.05, isFragile=False),
+            Wheel(randomVector(sigma), 1, 0.05, isFragile=False),
+            Wheel(randomVector(sigma), 1, 0.01, isFragile=True),
+            Wheel(randomVector(sigma), 1, 0.01, isFragile=True)
+        ], [
             Spring(0, 1, 0.01, 0.01),
             Spring(0, 2, 0.01, 0.01),
             Spring(0, 3, 0.01, 0.01),
