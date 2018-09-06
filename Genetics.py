@@ -3,9 +3,12 @@ import numpy.random
 from Bike import Wheel, Spring, Bike
 from Vector import Vector
 
-wheelDistanceExtension = 0.1
-mutationRate = 0.05
-mutationAmount = 0.01
+wheelDistanceExtension = 0.2
+mutationRate = 0.1
+wheelPosMutationAmount = 0.25
+springkMutationAmount = 0.25
+springDampingMutationAmount = 0.25
+springx0MutationAmount = 0.25
 
 def randomVector(sigma):
     phi = np.random.uniform(0, 2 * np.pi)
@@ -38,22 +41,43 @@ def crossoverWheel(w1, w2):
     # TODO: Evolve mass and radius if relevant
     return Wheel(vertex, w1.mass, w1.radius, w1.speed, w1.isFragile)
 
+
+def crossoverSpring(s1, s2):
+    # Use better crossover
+    return Spring(s1.i1, s1.i2, 0.5 * (s1.k + s2.k), 0.5 * (s1.damping + s2.damping))
+
+
 def mutate(child):
     for wheel in child.wheels:
         if np.random.rand() < mutationRate:
             phi = np.random.rand() * 2 * np.pi
-            r = np.random.normal(0, mutationAmount)
+            r = np.random.normal(0, wheelPosMutationAmount)
             wheel.pos += Vector(r * np.cos(phi), r * np.sin(phi))
-    
+    for spring in child.springs:
+        if np.random.rand() < mutationRate:
+            kNew = np.random.normal(spring.k, springkMutationAmount)
+            if kNew > 0: spring.k = kNew
+            dampingNew = np.random.normal(spring.damping, springDampingMutationAmount)
+            if dampingNew > 0: spring.damping = dampingNew
+            x0New = np.random.normal(spring.x0, springx0MutationAmount)
+            if x0New > 0: spring.x0 = x0New
 
 def generateOffspring(parents):
 
     newWheels = [ crossoverWheel(w1, w2) 
                   for (w1, w2) in zip(parents[0].wheels, parents[1].wheels) ]
+    
+    newSprings = [ crossoverSpring(s1, s2)
+                   for (s1, s2) in zip(parents[0].springs, parents[1].springs) ]
 
     # TODO crossover springs
-    child = Bike(newWheels, parents[0].springs)
+    child = Bike(newWheels, newSprings)
     mutate(child)
+
+    centerOfMass = sum([ wheel.pos for wheel in child.wheels ], Vector(0, 0))
+    for wheel in child.wheels:
+        wheel.pos -= centerOfMass / len(child.wheels)
+
     return child
 
 
