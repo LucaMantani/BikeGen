@@ -15,20 +15,26 @@ class Evolver:
     #    pass
 
     def genParents(population):
-        names = np.array([t[0] for t in population])
-        tot = sum(t[1] for t in population)
+        length = len(population) #number of bikes, perheps this can be a global class variable
+        names = [t[0] for t in population] #the list of bikes, also a potential global
+        tot = sum(t[1] for t in population) #total fitness score
         prob = []
         pred = []
-        for i in range(len(population)):
+        for i in range(length):
             prob.append(population[i][1]/tot)
             pred.append((bikes[i],population[i][1]/tot))
 
         dic = dict(pred)
-        select = np.random.choice(names,2,p=prob)
-        #par1 = np.array(select[0].vertices)
-        #par2 = np.array(select[1].vertices)
-        #child = 
-        return select
+        child = []
+        for i in range(length):
+            select = np.random.choice(names,2,p=prob)
+            mute = np.random.rand()
+            #if mute <=0.01:  #how likely the child is going to mutate
+             #   child.append
+                
+            child.append((dic[select[0]]/(dic[select[0]]+dic[select[1]]))*select[0] + (dic[select[1]]/(dic[select[0]]+dic[select[1]]))*select[1])
+  
+        return child
             
 
 
