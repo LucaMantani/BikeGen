@@ -18,6 +18,7 @@ class Ground:
         return self.vertices[0].y
 
     def distance(self, vertex):
+    
         for i in range(len(self.vertices)-2, -1, -1):
             if self.vertices[i].x < vertex.x:
 
@@ -29,10 +30,8 @@ class Ground:
 
                 return dist * nPerp
 
-
-
-# a = Ground([Vector(0.0,0.0),Vector(0.3,0.0), Vector(0.5, 0.5), Vector(1.0, 0.0)])
-
-# b = Vector(0.1, 0.5)
-
-# print(a.distance(b))
+        if vertex.x < 0:
+            return Vector(0, vertex.y - self.vertices[0].y)
+        else:
+            return Vector(0, vertex.y - self.vertices[-1].y)
+            
