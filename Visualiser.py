@@ -23,7 +23,7 @@ class Visualiser:
         # Initialize graphics objects
         vertices = []
         for wheel in self.bike.wheels:
-            newVertex = Circle((wheel.pos.x, wheel.pos.y), wheel.radius)
+            newVertex = Circle((wheel.pos.x, wheel.pos.y), wheel.radius, color="r")
             newVertex.set_visible(False)
             vertices.append(newVertex)
             axes.add_patch(newVertex)
@@ -73,3 +73,5 @@ class Visualiser:
                                         blit=True)
 
         plt.show()
+
+
