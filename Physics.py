@@ -38,7 +38,11 @@ def ground_collision(bike, ground):
 
             vPar = wheel.vel.scalarProduct(dPar)
 
+
             wheel.pos += (wheel.radius - distanceVector.r) * dPerp
+
+            if wheel.pos.y < ground.getHeight(wheel.pos.x):
+                wheel.pos -= 2*wheel.radius*dPerp
             wheel.vel = vPar * dPar
 
             
