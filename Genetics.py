@@ -8,7 +8,6 @@ mutationRate = 0.1
 wheelPosMutationAmount = 0.25
 springkMutationAmount = 0.25
 springDampingMutationAmount = 0.25
-springx0MutationAmount = 0.25
 
 def randomVector(sigma):
     phi = np.random.uniform(0, 2 * np.pi)
@@ -59,8 +58,7 @@ def mutate(child):
             if kNew > 0: spring.k = kNew
             dampingNew = np.random.normal(spring.damping, springDampingMutationAmount)
             if dampingNew > 0: spring.damping = dampingNew
-            x0New = np.random.normal(spring.x0, springx0MutationAmount)
-            if x0New > 0: spring.x0 = x0New
+            
 
 def generateOffspring(parents):
 
