@@ -54,6 +54,11 @@ def generateOffspring(parents):
     # TODO crossover springs
     child = Bike(newWheels, parents[0].springs)
     mutate(child)
+
+    centerOfMass = sum([ wheel.pos for wheel in child.wheels ], Vector(0, 0))
+    for wheel in child.wheels:
+        wheel.pos -= centerOfMass / len(child.wheels)
+
     return child
 
 
