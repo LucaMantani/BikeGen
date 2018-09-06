@@ -18,12 +18,6 @@ class Vector():
     @property
     def phi(self): return math.atan2(self._y, self._x)
 
-    def unitVector(self): 
-        return self / self.r
-
-    def scalarProduct(self, vertex):
-        return self.x * vertex.x + self.y * vertex.y
-
     def __add__(self, other):
         return Vector(self._x + other._x, self._y + other._y)
 
@@ -35,9 +29,6 @@ class Vector():
 
     def __rmul__(self, scale):
         return Vector(self._x * scale, self._y * scale)
-
-    def __truediv__(self, scale):
-        return Vector(self._x / scale, self._y / scale)
 
     def __str__(self):
         return "({}, {})".format(self._x, self._y)
