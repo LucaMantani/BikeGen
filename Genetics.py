@@ -3,9 +3,9 @@ import numpy.random
 from Bike import Wheel, Spring, Bike
 from Vector import Vector
 
-wheelDistanceExtension = 0.2
-mutationRate = 0.1
-mutationAmount = 0.25
+wheelDistanceExtension = 0.1
+mutationRate = 0.05
+mutationAmount = 0.01
 
 def randomVector(sigma):
     phi = np.random.uniform(0, 2 * np.pi)
