@@ -1,4 +1,5 @@
 from Bike import Wheel, Spring, Bike
+from Ground import Ground
 from Vector import Vector
 from Visualiser import Visualiser
 import Physics
@@ -18,8 +19,10 @@ theBike = Bike([
                     Spring(2, 3, 0.001, 0.001)
                ])
 
+theGround = Ground([ Vector(-1, -1), Vector(-0.25, -0.5), Vector(0.25, -0.75), Vector(1, -0.8) ])
+
 def updateBike(frameNumber):
     Physics.timestep(theBike)
 
-v = Visualiser(theBike, updateBike)
+v = Visualiser(theBike, theGround, updateBike)
 v.run()
