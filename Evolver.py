@@ -14,7 +14,7 @@ class Evolver:
     # def sortBikes():
     #    pass
 
-    def genParents(population):
+    def evolve(population):
         length = len(population) #number of bikes, perheps this can be a global class variable
         names = [t[0] for t in population] #the list of bikes, also a potential global
         tot = sum(t[1] for t in population) #total fitness score
