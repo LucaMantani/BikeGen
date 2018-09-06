@@ -3,7 +3,7 @@ from Bike import Bike
 import numpy as np
 from Ground import Ground
 
-g_N = 0.001
+g_N = 0.003
 
 def springs(bike):
     forces = [ Vector(0, 0) for _ in bike.wheels ]
@@ -28,6 +28,7 @@ def gravity(bike):
 
 
 def groundCollision(bike, ground):
+    brokeFragile = False
     for wheel in bike.wheels:        
         distanceVector = ground.distance(wheel.pos)
         if wheel.pos.y < ground.getHeight(wheel.pos.x) or distanceVector.r < wheel.radius:
@@ -43,6 +44,10 @@ def groundCollision(bike, ground):
 
             wheel.vel = (vPar + wheel.speed / wheel.mass) * dPar
         
+            if wheel.isFragile:
+                brokeFragile = True
+    
+    return brokeFragile
             
             
 def timestep(bike, ground):
@@ -52,6 +57,6 @@ def timestep(bike, ground):
     for wheel in bike.wheels:
         wheel.pos += wheel.vel
 
-    groundCollision(bike,ground)
+    return groundCollision(bike,ground)
 
 

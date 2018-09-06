@@ -9,14 +9,14 @@ import copy
 
 theBike = Genetics.generateBike(0.5)
 bikes = Genetics.generateInitialPopulation(0.5, 10)
-maxlifetime = 300
+maxlifetime = 100
 
 theGround = Ground([ Vector(-1, -1), Vector(-0.5, -1), Vector(0, -1), Vector(1, -1) ])
 
 def simulate(bike):
     bike = copy.deepcopy(bike)
     for i in range(1,maxlifetime):
-        if not Physics.timestep(bike, theGround):
+        if Physics.timestep(bike, theGround):
             #record the distance travelled and then break
             return i
     return maxlifetime
