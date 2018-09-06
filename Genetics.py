@@ -15,10 +15,10 @@ def randomVector(sigma):
 def generateBike(sigma):
     return Bike(
         [ 
-            Wheel(randomVector(sigma), 1, 0.05, isFragile=False),
-            Wheel(randomVector(sigma), 1, 0.05, isFragile=False),
-            Wheel(randomVector(sigma), 1, 0.01, isFragile=True),
-            Wheel(randomVector(sigma), 1, 0.01, isFragile=True)
+            Wheel(randomVector(sigma), 1, 0.05, 1, False),
+            Wheel(randomVector(sigma), 1, 0.05, 0, False),
+            Wheel(randomVector(sigma), 1, 0.01, 0, True),
+            Wheel(randomVector(sigma), 1, 0.01, 0, True)
         ], [
             Spring(0, 1, 0.01, 0.01),
             Spring(0, 2, 0.01, 0.01),
@@ -36,7 +36,7 @@ def crossoverWheel(w1, w2):
     t = np.random.uniform(-wheelDistanceExtension, 1.0 + wheelDistanceExtension)
     vertex = (1 - t) * w1.pos + t * w2.pos
     # TODO: Evolve mass and radius if relevant
-    return Wheel(vertex, w1.mass, w1.radius)
+    return Wheel(vertex, w1.mass, w1.radius, w1.speed, w1.isFragile)
 
 def mutate(child):
     for wheel in child.wheels:
