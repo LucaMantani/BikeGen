@@ -31,8 +31,7 @@ def ground_collision(bike, ground):
     for wheel in bike.wheels:        
         distanceVector = ground.distance(wheel.pos)
         if wheel.pos.y < ground.getHeight(wheel.pos.x) or distanceVector.r < wheel.radius:
-            if wheel.isFragile==True:
-                return False
+
             dPerp = distanceVector.unitVector()
             dPar  = Vector(dPerp.y, -dPerp.x)
 
@@ -44,6 +43,8 @@ def ground_collision(bike, ground):
             if wheel.pos.y < ground.getHeight(wheel.pos.x):
                 wheel.pos -= 2*wheel.radius*dPerp
             wheel.vel = vPar * dPar
+            if wheel.isFragile==True:
+                return False
     return True
             
 def driving_wheel(bike, ground):
