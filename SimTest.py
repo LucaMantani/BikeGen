@@ -7,16 +7,16 @@ import Physics
 import copy
 
 
-theBike = Genetics.generateBike(0.25)
-bikes = Genetics.generateInitialPopulation(0.25, 10)
+theBike = Genetics.generateBike(0.5)
+bikes = Genetics.generateInitialPopulation(0.5, 10)
 maxlifetime = 100
 
-theGround = Ground([ Vector(-1, -1), Vector(-1, -1), Vector(-1, -1), Vector(-1, -1) ])
+theGround = Ground([ Vector(-1, -1), Vector(-0.5, -1), Vector(0, -1), Vector(1, -1) ])
 
 def simulate(bike):
     bike = copy.deepcopy(bike)
     for i in range(1,maxlifetime):
-        if not Physics.timestep(bike):
+        if not Physics.timestep(bike, theGround):
             #record the distance travelled and then break
             return i
     return maxlifetime
@@ -33,7 +33,7 @@ def updateVertices(frameNumber):
         bikes = Genetics.evolve(bikes,simulate)
         theBike.wheels = bikes[0].wheels
     else:
-        Physics.timestep(theBike)
+        Physics.timestep(theBike, theGround)
 
 
 v = Visualiser(theBike, theGround, updateVertices)

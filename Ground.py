@@ -1,3 +1,4 @@
+import numpy as np
 from Vector import Vector
 
 class Ground:
@@ -15,3 +16,22 @@ class Ground:
                 return (1 - t) * self.vertices[i].y + t * self.vertices[i + 1].y
             
         return self.vertices[0].y
+
+    def distance(self, vertex):
+    
+        for i in range(len(self.vertices)-2, -1, -1):
+            if self.vertices[i].x < vertex.x:
+
+                v0 = self.vertices[i]
+                dv = (self.vertices[i + 1] - self.vertices[i]).unitVector()
+
+                nPerp = Vector(-dv.y, dv.x)
+                dist = (vertex - v0).scalarProduct(nPerp)
+
+                return dist * nPerp
+
+        if vertex.x < 0:
+            return Vector(0, vertex.y - self.vertices[0].y)
+        else:
+            return Vector(0, vertex.y - self.vertices[-1].y)
+            
