@@ -20,18 +20,15 @@ class Ground:
     def distance(self, vertex):
         for i in range(len(self.vertices)-2, -1, -1):
             if self.vertices[i].x < vertex.x:
-                if self.vertices[i].y - self.vertices[i+1].y == 0:
-                    return vertex.y - self.getHeight(vertex.x)
 
-                a = 1/(self.vertices[i+1].x-self.vertices[i].x)
-                b = -1/(self.vertices[i+1].y-self.vertices[i].y)
-                c = self.vertices[i].y/(self.vertices[i+1].y-self.vertices[i].y) -self.vertices[i].x/(self.vertices[i+1].x-self.vertices[i].x)
+                v0 = self.vertices[i]
+                dv = (self.vertices[i + 1] - self.vertices[i]).unitVector()
 
-                direction = self.vertices[i+1] - self.vertices[i]
-                m = -direction.y/direction.x
-                perp_vec = Vector(1.0, m*1.0).unitVector()
+                nPerp = Vector(-dv.y, dv.x)
+                dist = (vertex - v0).scalarProduct(nPerp)
 
-                return (abs(a*vertex.x + b*vertex.y + c)/np.sqrt(a**2 + b**2)) * perp_vec
+                return dist * nPerp
+
 
 
 # a = Ground([Vector(0.0,0.0),Vector(0.3,0.0), Vector(0.5, 0.5), Vector(1.0, 0.0)])
