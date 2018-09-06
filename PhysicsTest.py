@@ -5,10 +5,10 @@ from Visualiser import Visualiser
 import Physics
 
 theBike = Bike([ 
-                    Wheel(Vector(-0.4, -0.3), 1, 0.03),
-                    Wheel(Vector(-0.45, -0.3), 1, 0.03),
-                    Wheel(Vector(-0.4, -0.25), 1, 0.01),
-                    Wheel(Vector(-0.45, -0.25), 1, 0.01)
+                    Wheel(Vector(-0.4, -0.3), 1, 0.03, 0.1,False),
+                    Wheel(Vector(-0.45, -0.3), 1, 0.03, 0., False),
+                    Wheel(Vector(-0.4, -0.25), 1, 0.01, 0., False),
+                    Wheel(Vector(-0.45, -0.25), 1, 0.01, 0., False)
                ],
                [
                     Spring(0, 1, 0.1, 0.01),

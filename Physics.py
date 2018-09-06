@@ -3,9 +3,8 @@ from Bike import Bike
 import numpy as np
 from Ground import Ground
 
-springx0 = 0.7
+springx0 = 0.1
 g_N = 0.0005
-driving = 0.000
 
 def springs(bike):
     forces = [ Vector(0, 0) for _ in bike.wheels ]
@@ -46,7 +45,16 @@ def ground_collision(bike, ground):
             wheel.vel = vPar * dPar
 
             
+def driving_wheel(bike, ground):
+    for wheel in bike.wheels:
+        distanceVector = ground.distance(wheel.pos)
+        if distanceVector.r == wheel.radius:
+            dPerp = distanceVector.unitVector()
+            dPar  = Vector(dPerp.y, -dPerp.x)
 
+            wheel.vel += wheel.speed / wheel.mass * dPar
+            
+            
 def timestep(bike, ground):
     springs(bike)
     gravity(bike)
@@ -56,8 +64,7 @@ def timestep(bike, ground):
 
     ground_collision(bike, ground)
 
-    if bike.vertices[0].y == -1.0 + bike.wheels[0].radius:
-        bike.wheels[0].vel += driving / bike.wheels[0].mass * Vector(1.0, 0.0)
+    driving_wheel(bike, ground)
 
 
 
