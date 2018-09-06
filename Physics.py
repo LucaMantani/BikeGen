@@ -29,7 +29,7 @@ def gravity(bike):
         wheel.vel += gravity_force
 
 
-def ground_collision(bike,ground):
+def ground_collision(bike):
     for wheel in bike.wheels:
         distance_vec = ground.distance(wheel)
         if (distance_vec.r - wheel.radius) < 0.0:
@@ -45,7 +45,7 @@ def timestep(bike):
     for wheel in bike.wheels:
         wheel.pos += wheel.vel
 
-    ground_collision(bike,ground)
+    ground_collision(bike)
 
     if bike.vertices[0].y == -1.0 + bike.wheels[0].radius:
         bike.wheels[0].vel += driving / bike.wheels[0].mass * Vector(1.0, 0.0)
