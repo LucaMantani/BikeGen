@@ -4,7 +4,6 @@ import numpy as np
 
 
 springx0 = 0.7
-radius = 0.03
 g_N = 0.0005
 driving = 0.001
 

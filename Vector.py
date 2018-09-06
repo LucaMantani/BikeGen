@@ -21,6 +21,9 @@ class Vector():
     def unitVector(self): 
         return self / self.r
 
+    def scalarProduct(self, vertex):
+        return self.x * vertex.x + self.y * vertex.y
+
     def __add__(self, other):
         return Vector(self._x + other._x, self._y + other._y)
 
