@@ -23,12 +23,12 @@ def generateBike(sigma):
             Wheel(randomVector(sigma), 1, 0.01, 0, True),
             Wheel(randomVector(sigma), 1, 0.01, 0, True)
         ], [
-            Spring(0, 1, 0.01, 0.01, 1),
-            Spring(0, 2, 0.01, 0.01, 1),
-            Spring(0, 3, 0.01, 0.01, 1),
-            Spring(1, 2, 0.01, 0.01, 1),
-            Spring(1, 3, 0.01, 0.01, 1),
-            Spring(2, 3, 0.01, 0.01, 1)
+            Spring(0, 1, 0.01, 0.01),
+            Spring(0, 2, 0.01, 0.01),
+            Spring(0, 3, 0.01, 0.01),
+            Spring(1, 2, 0.01, 0.01),
+            Spring(1, 3, 0.01, 0.01),
+            Spring(2, 3, 0.01, 0.01)
         ])
 
 def generateInitialPopulation(sigma, nIndividuals):
@@ -44,7 +44,7 @@ def crossoverWheel(w1, w2):
 
 def crossoverSpring(s1, s2):
     # Use better crossover
-    return Spring(s1.i1, s1.i2, 0.5 * (s1.k + s2.k), 0.5 * (s1.damping + s2.damping), 0.5 * (s1.x0 + s2.x0))
+    return Spring(s1.i1, s1.i2, 0.5 * (s1.k + s2.k), 0.5 * (s1.damping + s2.damping))
 
 
 def mutate(child):

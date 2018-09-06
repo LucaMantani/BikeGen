@@ -9,7 +9,7 @@ import copy
 
 theBike = Genetics.generateBike(0.5)
 bikes = Genetics.generateInitialPopulation(0.5, 10)
-maxlifetime = 100
+maxlifetime = 300
 
 theGround = Ground([ Vector(-1, -1), Vector(-0.5, -1), Vector(0, -1), Vector(1, -1) ])
 
@@ -32,6 +32,7 @@ def updateVertices(frameNumber):
     if frameNumber % maxlifetime == 0:
         bikes = Genetics.evolve(bikes,simulate)
         theBike.wheels = bikes[0].wheels
+        theBike.springs = bikes[0].springs
     else:
         Physics.timestep(theBike, theGround)
 

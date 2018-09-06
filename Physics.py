@@ -3,7 +3,7 @@ from Bike import Bike
 import numpy as np
 from Ground import Ground
 
-g_N = 0.0005
+g_N = 0.001
 
 def springs(bike):
     forces = [ Vector(0, 0) for _ in bike.wheels ]
