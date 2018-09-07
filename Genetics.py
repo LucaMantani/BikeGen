@@ -20,8 +20,8 @@ def generateBike(sigma):
         [ 
             Wheel(randomVector(sigma), 1, 0.05, 0.01, False),
             Wheel(randomVector(sigma), 1, 0.05, 0, False),
-            Wheel(randomVector(sigma), 5, 0.01, 0, True),
-            Wheel(randomVector(sigma), 5, 0.01, 0, True)
+            Wheel(randomVector(sigma), 2, 0.01, 0, True),
+            Wheel(randomVector(sigma), 2, 0.01, 0, True)
         ], [
             Spring(0, 1, 0.5, 0.05),
             Spring(0, 2, 0.5, 0.05),
