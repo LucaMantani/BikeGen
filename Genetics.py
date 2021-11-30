@@ -19,12 +19,11 @@ def randomVector(sigma):
 def generateBike(sigma):
     return Bike(
         [ 
-            Wheel(randomVector(sigma), 1, 0.03, 0.01, False),
-            Wheel(randomVector(sigma), 1, 0.03, 0, False),
-            Wheel(randomVector(sigma), 1, 0.01, 0, True),
-            Wheel(randomVector(sigma), 1, 0.01, 0, True)
+            Wheel(randomVector(sigma), 1, 0.05, 0.01, False),
+            Wheel(randomVector(sigma), 1, 0.05, 0, False),
+            Wheel(randomVector(sigma), 2, 0.01, 0, True),
+            Wheel(randomVector(sigma), 2, 0.01, 0, True)
         ], [
-
             Spring(0, 1, 0.1, 0.01),
             Spring(0, 2, 0.1, 0.01),
             Spring(0, 3, 0.1, 0.01),
