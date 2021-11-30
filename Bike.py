@@ -20,7 +20,7 @@ class Spring:
         self.k = k
         self.damping = damping
         self.x0 = 0.1
-
+        
 class Bike:
 
     def __init__(self, wheels, springs):
@@ -28,6 +28,7 @@ class Bike:
         self.springs = springs
 
         for s in springs:
+
             s.x0 = (self.wheels[s.i1].pos-self.wheels[s.i2].pos).r
 
     @property

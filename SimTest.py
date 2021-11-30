@@ -9,7 +9,7 @@ import copy
 
 theBike = Genetics.generateBike(0.5)
 bikes = Genetics.generateInitialPopulation(0.5, 10)
-maxlifetime = 100
+maxlifetime = 300
 
 theGround = Ground([ Vector(-1, -1), Vector(-0.5, -1), Vector(0, -1), Vector(1, -1) ])
 
@@ -22,7 +22,7 @@ def simulate(bike):
     return maxlifetime
             
 
-#for i in range(10):
+#for i in range(100):
 #     bikes = Genetics.evolve(bikes,simulate)
         
 

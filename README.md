@@ -1,2 +1,2 @@
-# bikegen
+# BikeGen
 
